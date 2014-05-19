@@ -261,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlist=${TEMP_DIR}\"/Preprocessed-Info.plist\"\nmarketVersion=$($plistBuddy -c \"Print CFBundleShortVersionString\" $infoPlist)\n\nversionPrefix=\"dev-\"\nlastCommitDate=`xcrun git log -1 --format='%ci'`\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$marketVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlist\n\nfi";
+			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlist=${TEMP_DIR}\"/Preprocessed-Info.plist\"\nmarketVersion=$($plistBuddy -c \"Print CFBundleShortVersionString\" $infoPlist)\n\nversionPrefix=\"dev-\"\nlastCommitDate=$(git log -1 --format='%ci')\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$marketVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlist\n\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
