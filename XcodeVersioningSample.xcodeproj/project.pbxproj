@@ -166,6 +166,7 @@
 				067ECCCA1924959900C396F0 /* Sources */,
 				067ECCCB1924959900C396F0 /* Frameworks */,
 				067ECCCC1924959900C396F0 /* Resources */,
+				060E62AF192A38B30093AD61 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,6 +251,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		060E62AF192A38B30093AD61 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "infoPlist=${TEMP_DIR}\"/Preprocessed-Info.plist\"\nrm $infoPlist";
+		};
 		067ECD0A1924AECA00C396F0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,7 +275,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlist=${TEMP_DIR}\"/Preprocessed-Info.plist\"\nmarketVersion=$($plistBuddy -c \"Print CFBundleShortVersionString\" $infoPlist)\n\nversionPrefix=\"dev-\"\nlastCommitDate=$(git log -1 --format='%ci')\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$marketVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlist\n\nfi";
+			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlist=${TEMP_DIR}\"/Preprocessed-Info.plist\"\ncurrentVersion=$($plistBuddy -c \"Print CFBundleVersion\" $infoPlist)\n\nversionPrefix=\"dev-\"\nlastCommitDate=$(git log -1 --format='%ci')\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$currentVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlist\n\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
