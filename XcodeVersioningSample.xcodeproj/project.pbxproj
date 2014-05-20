@@ -162,10 +162,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 067ECD031924959A00C396F0 /* Build configuration list for PBXNativeTarget "XcodeVersioningSample" */;
 			buildPhases = (
-				067ECD0A1924AECA00C396F0 /* ShellScript */,
 				067ECCCA1924959900C396F0 /* Sources */,
 				067ECCCB1924959900C396F0 /* Frameworks */,
 				067ECCCC1924959900C396F0 /* Resources */,
+				067ECD0A1924AECA00C396F0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -261,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlist=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\ncurrentVersion=$($plistBuddy -c \"Print CFBundleVersion\" $infoPlist)\n\nversionPrefix=\"dev-\"\nlastCommitDate=$(git log -1 --format='%ci')\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$currentVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlist\n\nfi";
+			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n\nplistBuddy=\"/usr/libexec/PlistBuddy\"\ninfoPlistSource=\"${SRCROOT}/${INFOPLIST_FILE}\"\ninfoPlistDestination=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\ncurrentVersion=$($plistBuddy -c \"Print CFBundleVersion\" $infoPlistSource)\n\nversionPrefix=\"dev-\"\nlastCommitDate=$(git log -1 --format='%ci')\nversionSuffix=\" ($lastCommitDate)\"\n\nversionString=$versionPrefix$currentVersion$versionSuffix\n\n$plistBuddy -c \"Set :CFBundleVersion $versionString\" $infoPlistDestination\n\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
